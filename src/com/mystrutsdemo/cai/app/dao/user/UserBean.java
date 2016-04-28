@@ -1,4 +1,4 @@
-package com.mystrutsdemo.cai.app.user;
+package com.mystrutsdemo.cai.app.dao.user;
 
 public class UserBean 
 {

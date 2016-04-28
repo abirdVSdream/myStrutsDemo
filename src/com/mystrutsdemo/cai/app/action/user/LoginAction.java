@@ -1,7 +1,7 @@
 package com.mystrutsdemo.cai.app.action.user;
 
-import com.mystrutsdemo.cai.app.service.LoginService;
-import com.mystrutsdemo.cai.app.user.UserBean;
+import com.mystrutsdemo.cai.app.dao.user.UserBean;
+import com.mystrutsdemo.cai.app.service.user.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -28,15 +28,15 @@ public class LoginAction extends ActionSupport
 	public String execute() throws Exception
 	{
 		ActionContext ctx = ActionContext.getContext();
-		LoginService loginService = new LoginService();
+		UserService userService = new UserService();
 		if((uname.equals("")||uname.equals(null))||(upass.equals("")||upass.equals(null)))
 		{
 			ctx.put("tip", "用户名或者密码不能为空");
 			return ERROR;
 		}else
 		{
-			String username = loginService.serchByusername(uname).getUsername();
-			String password = loginService.serchByusername(uname).getPassword();
+			String username = userService.serchByusername(uname).getUsername();
+			String password = userService.serchByusername(uname).getPassword();
 		 	if(username==null)
 			{
 				ctx.put("tip", "用户不存在");

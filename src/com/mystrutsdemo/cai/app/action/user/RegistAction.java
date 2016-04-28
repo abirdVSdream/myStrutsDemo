@@ -1,6 +1,6 @@
 package com.mystrutsdemo.cai.app.action.user;
 
-import com.mystrutsdemo.cai.app.user.UserBean;
+import com.mystrutsdemo.cai.app.dao.user.UserBean;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 

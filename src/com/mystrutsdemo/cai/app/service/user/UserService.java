@@ -1,16 +1,16 @@
-package com.mystrutsdemo.cai.app.service;
+package com.mystrutsdemo.cai.app.service.user;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import com.mystrutsdemo.cai.app.user.UserBean;
+import com.mystrutsdemo.cai.app.dao.user.UserBean;
 
 
-public class LoginService 
+public class UserService 
 {
-	public UserBean Connect(String sql,String s) throws Exception
+	public UserBean Connect(String sql) throws Exception
 	{
 		
 		
@@ -23,8 +23,8 @@ public class LoginService
 			Statement st = conn.createStatement();
 			
 			UserBean userBean = new UserBean();
-			String sq = sql+s;
-			ResultSet rs =st.executeQuery(sq);
+//			String sq = sql+s;
+			ResultSet rs =st.executeQuery(sql);
 			while(rs.next())
 			{
 				userBean.setUsername(rs.getString("username"));
@@ -43,8 +43,9 @@ public class LoginService
 	}
 	public UserBean serchByusername (String username) throws Exception
 	{
-		String sql = "select id,username,password,email from user where username=";
-		return Connect(sql,change(username)); 
+		String sq = "select id,username,password,email from user where username=";
+		String sql = sq+change(username);
+		return Connect(sql); 
 	}
 	
 	public String change(String  s)
@@ -52,6 +53,16 @@ public class LoginService
 		String  sc = "'"+s+"'";
 		return sc;
 	}
+	public void insert(UserBean userBean) throws Exception
+	{
+		String sq ="insert into user values(";
+		String user = userBean.getUsername();
+		String pass =userBean.getPassword();
+		String mail = userBean.getMail();
+		String sql = sq+user+","+pass+","+mail+")";
+		Connect(sql);
+	}
+	
 //	public static void main(String args[])
 //	{
 //		LoginService lg = new LoginService();
