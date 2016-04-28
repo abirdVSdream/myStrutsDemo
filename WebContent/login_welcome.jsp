@@ -10,7 +10,7 @@
 <body>
 ${requestScop.tip}<br/>
 <s:text name="succTip">
-<s:param><s:property value="username"/></s:param>
+<s:param><s:property value="uname"/></s:param>
 </s:text>
 </body>
 </html>

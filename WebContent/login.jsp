@@ -9,8 +9,8 @@
 </head>
 <body>
 <s:form action="login">
-	<s:textfield name="username" key="user"/>
-	<s:textfield name="password" key="pass"/>
+	<s:textfield name="uname" key="user"/>
+	<s:textfield name="upass" key="pass"/>
 	<s:submit key="login"/> 
 	<!--<s:submit key="regist"/>-->
 </s:form>

@@ -1,39 +1,59 @@
 package com.mystrutsdemo.cai.app.action.user;
 
+import com.mystrutsdemo.cai.app.service.LoginService;
+import com.mystrutsdemo.cai.app.user.UserBean;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport 
 {
-	private String username;
-	private String password;
-	public String getUsername() {
-		return username;
+	//private LoginService loginService;
+	private String uname;
+	private String upass;
+	
+	
+	public String getUname() {
+		return uname;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUname(String uname) {
+		this.uname = uname;
 	}
-	public String getPassword() {
-		return password;
+	public String getUpass() {
+		return upass;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUpass(String upass) {
+		this.upass = upass;
 	}
+	
 	public String execute() throws Exception
 	{
 		ActionContext ctx = ActionContext.getContext();
-		username = getUsername();
-		password = getPassword();
-		if((username == null ||username=="") &&(password == null ||password==""))
+		LoginService loginService = new LoginService();
+		if((uname.equals("")||uname.equals(null))||(upass.equals("")||upass.equals(null)))
 		{
-			ctx.put("Tip", "用户名或者密码不能为空");
+			ctx.put("tip", "用户名或者密码不能为空");
 			return ERROR;
-		}
-		else
+		}else
 		{
-			ctx.put("Tip", new String []{username});
-			return SUCCESS;
+			String username = loginService.serchByusername(uname).getUsername();
+			String password = loginService.serchByusername(uname).getPassword();
+		 	if(username==null)
+			{
+				ctx.put("tip", "用户不存在");
+				return ERROR;
+			}
+			else if(!(password.equals(upass)))
+			{
+				ctx.put("tip", "用户名与者密码不匹配");
+				return ERROR;
+			}
+			else
+			{
+				ctx.put("tip", getText("succTip",new String[]{getUname()}));
+				return SUCCESS;
+			}
 		}
+		
 	}
 
 }
