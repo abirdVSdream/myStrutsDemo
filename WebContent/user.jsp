@@ -18,6 +18,8 @@ listKey="key" listVale="value"/>
 <s:bean name="com.mystrutsdemo.cai.app.service.test.BookService" id="bea"/>
 <s:checkboxlist name="test" label="请选择您的" labelposition="top"
 list="#bea.books" listKey="bookName" listVale="author"/>
+
+<s:doubleselect label="请选择您的书" doubleList="top=='java'?{'java bean','java service','javaaction'}:{'javascript:the definitve guide'}" list="{'java','phph'}" doubleName="book"></s:doubleselect>
 </s:form>
 
 </body>
