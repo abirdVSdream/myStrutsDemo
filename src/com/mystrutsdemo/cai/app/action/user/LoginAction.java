@@ -28,13 +28,14 @@ public class LoginAction extends ActionSupport
 	public String execute() throws Exception
 	{
 		ActionContext ctx = ActionContext.getContext();
-		UserService userService = new UserService();
+//		UserService userService = new UserService();
 		if((uname.equals("")||uname.equals(null))||(upass.equals("")||upass.equals(null)))
 		{
 			ctx.put("tip", "用户名或者密码不能为空");
 			return ERROR;
 		}else
 		{
+			UserService userService = new UserService();
 			String username = userService.serchByusername(uname).getUsername();
 			String password = userService.serchByusername(uname).getPassword();
 		 	if(username==null)

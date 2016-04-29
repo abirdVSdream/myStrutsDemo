@@ -10,9 +10,9 @@
 <body>
 <s:text name="registText"/><br/>
 <s:form action="regist" method="post">
-<s:textfield name="username" key="user"/>
-<s:textfield name="mail" key="mail"/>
-<s:textfield name="password" key="pass"/>
+<s:textfield name="uname" key="user"/>
+<s:textfield name="upass" key="pass"/>
+<s:textfield name="email" key="mail"/>
 <s:submit key="regist"/>
 </s:form>
 </body>
