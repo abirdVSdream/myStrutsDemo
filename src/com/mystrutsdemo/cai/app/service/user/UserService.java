@@ -42,7 +42,7 @@ public class UserService
 	}*/
 	public UserBean serchByusername (String username) throws Exception
 	{
-		String sq = "select id,username,password,email from user where username=";
+		String sq = "select uid,username,password,email from user where username=";
 		String sql = sq+change(username);
 		//加载驱动
 		Class.forName("com.mysql.jdbc.Driver");

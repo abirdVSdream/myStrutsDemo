@@ -2,16 +2,16 @@ package com.mystrutsdemo.cai.app.dao.user;
 
 public class UserBean 
 {
-	private String id;
+	private String uid;
 	private String username;
 	private String mail;
 	private String password;
 	
-	public String getId() {
-		return id;
+	public String getUid() {
+		return uid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUid(String uid) {
+		this.uid = uid;
 	}
 	public String getUsername() {
 		return username;
