@@ -21,11 +21,14 @@ public class Book
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
-	public String getAthod() {
+
+	public String getAuthor() {
 		return author;
 	}
-	public void setAthod(String author) {
+
+	public void setAuthor(String author) {
 		this.author = author;
 	}
+	
 	
 }

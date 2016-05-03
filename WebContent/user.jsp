@@ -17,9 +17,24 @@ list="#{'疯狂java':'java','疯狂PHP':'php','疯狂c':'c'}"
 listKey="key" listVale="value"/>
 <s:bean name="com.mystrutsdemo.cai.app.service.test.BookService" id="bea"/>
 <s:checkboxlist name="test" label="请选择您的" labelposition="top"
-list="#bea.books" listKey="bookName" listVale="author"/>
-
-<s:doubleselect label="请选择您的书" doubleList="top=='java'?{'java bean','java service','javaaction'}:{'javascript:the definitve guide'}" list="{'java','phph'}" doubleName="book"></s:doubleselect>
+list="#bea.books" listKey="bookName" listValue="bookName"/>
+<s:optiontransferselect 
+label="请选择您喜欢的书" name="cnbook" leftTitle="中文书" rightTitle="外文书" 
+list="{'疯狂java','struts','javaee'}" 
+multiple="true"
+addToLeftLabel="<-" 
+selectAllLabel="全部选择移动"
+addAllToRightLabel="->>"
+headerKey="cnkey"  headerValue="--选择中文书--" emptyOption="true"
+doubleList="{'lalal','lala'}"
+doubleName="enbook"
+doubleHeaderKey="enKey" doubleHeaderValue="--选择英文书--"
+doubleEmptyOption="true"
+doubleMultiple="true"/>
+<s:select list="#bea.books" name="a" label="请选择您的书籍" listKey="bookName" listValue="author"></s:select>
+<s:select list="#{'lal':'cai','lalal':'nianio'}" name="b" label="请选择您的书籍la" listKey="key" listValue="value"/>
+<s:radio list="#bea.books" name="radio" label="请选择您的书籍" listKey="bookName" listValue="author"></s:radio>
+<s:token/>
 </s:form>
 
 </body>
