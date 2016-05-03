@@ -1,13 +1,18 @@
 package com.mystrutsdemo.cai.app.action.user;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
+import com.mystrutsdemo.cai.app.dao.user.User;
 import com.mystrutsdemo.cai.app.dao.user.UserBean;
 import com.mystrutsdemo.cai.app.service.user.UserService;
+import com.mystrutsdemo.cai.app.service.user.UserServices;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class RegistAction extends ActionSupport
 {
-	private UserBean userBean;
+	private User userBean;
 	private String name;
 	
 
@@ -19,11 +24,11 @@ public class RegistAction extends ActionSupport
 		this.name = name;
 	}
 
-	public UserBean getUserBean() {
+	public User getUserBean() {
 		return userBean;
 	}
 
-	public void setUserBean(UserBean userBean) {
+	public void setUser(User userBean) {
 		this.userBean = userBean;
 	}
 
@@ -33,7 +38,13 @@ public class RegistAction extends ActionSupport
 		ActionContext act = ActionContext.getContext();
 		String uname = getUserBean().getUsername();
 		String upass = getUserBean().getPassword();
-		String email = getUserBean().getMail();
+		String email = getUserBean().getEmail();
+		String gender = getUserBean().getGender();
+		Timestamp birtyDay = getUserBean().getBirthday();
+		String qq = getUserBean().getQq();
+		String phone = getUserBean().getPhone();
+		String desc = getUserBean().getDescription();
+		Timestamp registTi = (Timestamp) new Date();
 		if(uname.equals("") || uname.equals(null))
 		{
 			act.put("tip", "你输入的用户名为空。请输入非空的用户名");
@@ -46,7 +57,7 @@ public class RegistAction extends ActionSupport
 		}
 		else 
 		{
-			UserService userService = new UserService();
+			UserServices userService = new UserServices();
 			String username = userService.serchByusername(uname).getUsername();
 			
 			if(uname.equals(username))

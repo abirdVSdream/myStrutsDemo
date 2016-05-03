@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.mystrutsdemo.cai.app.dao.user.UserBean;
@@ -19,7 +20,7 @@ public class UserServices
 	private String url = "jdbc:mysql://localhost:3306/mystrutsdemo";
 	private String user ="root";
 	private String pass = "123456";
-	public UserBean serchByusername (String username) throws Exception
+	public User serchByusername (String username) throws Exception
 	{
 		String sq = "select * from user where username=";
 		String sql = sq+change(username);
@@ -29,7 +30,7 @@ public class UserServices
 		Connection conn =DriverManager.getConnection(url,user,pass);
 		//创建sql语句
 		Statement st = conn.createStatement();
-		UserBean userBean = new UserBean();
+		User userBean = new User();
 		ResultSet rs =st.executeQuery(sql);
 		while(rs.next())
 		{
@@ -41,8 +42,8 @@ public class UserServices
 		conn.close();
 		return userBean;
 	}
-	
-	public int insert(UserBean userBean) throws Exception
+	//插入用户信息
+	public int insert(User userBean) throws Exception
 	{
 //		String user = userBean.getUsername();
 //		String pass =userBean.getPassword();
@@ -53,12 +54,20 @@ public class UserServices
         //建立连接
         Connection conn =DriverManager.getConnection(url,user,pass);
         
-        String sql ="insert into user(username,password,email)"+"values (?,?,?)";
+        String sql ="insert into user values (null,?,?,?,?,?,?,?,?,?,now())";
         //创建sql语句
         PreparedStatement PreparedStatement =conn.prepareStatement(sql);
         PreparedStatement.setString(1,userBean.getUsername());
         PreparedStatement.setString(2,userBean.getPassword());
-        PreparedStatement.setString(3,userBean.getMail());
+        PreparedStatement.setString(3,userBean.getEmail());
+        PreparedStatement.setString(4, userBean.getGender());
+        
+        PreparedStatement.setTimestamp(5, userBean.getBirthday());
+        PreparedStatement.setString(6,userBean.getQq());
+        PreparedStatement.setString(7,userBean.getPhone());
+        PreparedStatement.setString(8, userBean.getDescription());
+        PreparedStatement.setTimestamp(9, userBean.getRegtime());
+        
         
         int result = PreparedStatement.executeUpdate();
         
