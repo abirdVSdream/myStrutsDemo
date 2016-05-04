@@ -1,4 +1,4 @@
-package com.mystrutsdemo.cai.app.action.user;
+package com.mystrutsdemo.cai.app.action.manager;
 
 import java.util.ArrayList;
 import java.util.HashMap;

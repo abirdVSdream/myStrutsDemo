@@ -8,24 +8,31 @@
 <title>用户维护界面</title>
 </head>
 <body>
-<ul>
-	<li>ID</li>
-	<li>用户名</li>
-	<li>性别</li>
-	<li>操作</li>
-</ul>
-<s:iterator value="userList">
-	<ul>
-	<li><s:property value="uid"/></li>
-	<li><s:property value="username"/></li>
-	<li><s:property value="gender"/></li>
-	<li><a href="deleteUser.action?uid=<s:property value="uid"/>"></a></li>
-	</ul>
-	<span>邮箱：<s:property value="email"/></span>
-	<span>QQ:<s:property value="qq"/></span>
-	<span>电话：<s:property value="phone"/></span>
-	<span>自我介绍：<s:property value="description"/></span>
-</s:iterator>
+<table border="1">
+	<tr>
+	<th>ID</th>
+	<th>用户名</th>
+	<th>性别</th>
+	<th>邮箱</th>
+	<th>QQ</th>
+	<th>电话</th>
+	<th>自我介绍</th>
+	<th>操作</th>
+	</tr>
+<s:iterator id="u" value="userList">
+	<tr>
+	<td><s:property value="#u.uid"/></td>
+	<td><s:property value="#u.username"/></td>
+	<td><s:property value="#u.gender"/></td>
+	<td><s:property value="#u.email"/></td>
+	<td><s:property value="#u.qq"/></td>
+	<td><s:property value="#u.phone"/></td>
+	<td><s:property value="#u.description"/></td>
+	<td><a href="deleteUser.action?uid=<s:property value="#u.uid"/>">删除</a></td>
+	</tr>
+	</s:iterator>
+	</table>
+
 <s:url id="firstPage" action="page">
 <s:param name="pageNumber">1</s:param>
 </s:url>

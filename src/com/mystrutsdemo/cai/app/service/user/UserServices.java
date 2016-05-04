@@ -146,6 +146,21 @@ public class UserServices
 		
 	}
 	
+	public int deleteByuid(String uid) throws Exception
+	{
+		String sql = "delete from user where uid= ?";
+		//加载驱动
+		Class.forName("com.mysql.jdbc.Driver");
+		//建立连接
+		Connection conn =DriverManager.getConnection(url,dbUser,pass);
+		//创建sql语句
+		PreparedStatement PreparedStatement =conn.prepareStatement(sql);
+		PreparedStatement.setString(1,uid);
+		int result = PreparedStatement.executeUpdate();
+		return result;
+		
+	}
+	
 	public String change(String  s)
 	{
 		String  sc = "'"+s+"'";

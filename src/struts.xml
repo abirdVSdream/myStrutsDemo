@@ -35,7 +35,7 @@
 			<!-- <result name="success" type="redirect">/welcome.jsp</result>-->
 		</action>
 		
-		<action name="userList" class="com.mystrutsdemo.cai.app.action.user.UserListAction">
+		<action name="userList" class="com.mystrutsdemo.cai.app.action.manager.UserListAction">
 		<!--  <interceptor-ref name="managerLogin"/>
 		<interceptor-ref name="defaultStack"/>-->
 		<result name="login">/manager/login.jsp</result>
@@ -47,9 +47,13 @@
 		<result name="login">/manager//login.jsp</result>
 		<result type="redirect">/userList.action?pageNumber=${pageNumber}&amp;pageSize=${pageSize}&amp;totalPage=${totalPage}</result>
 		</action>
-		
+		<!-- manager 的登录和修改用户表action -->
 		<action name="managerlogin" class="com.mystrutsdemo.cai.app.action.manager.ManagerLoginAction">
-			<result name="error">/error.jsp</result>
+			<result name="login">/manager/login.jsp</result>
+			<result type="redirect">/userList.action?pageNumber=${pageNumber}&amp;pageSize=${pageSize}&amp;totalPage=${totalPage}</result>
+		</action>
+		
+		<action name="deleteUser" class="com.mystrutsdemo.cai.app.action.manager.ManagerLoginAction" method="delete">
 			<result type="redirect">/userList.action?pageNumber=${pageNumber}&amp;pageSize=${pageSize}&amp;totalPage=${totalPage}</result>
 		</action>
 	</package>

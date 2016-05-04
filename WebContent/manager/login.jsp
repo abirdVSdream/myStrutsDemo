@@ -11,6 +11,7 @@
 <s:form action="managerlogin">
 	<s:textfield name="userBean.username" key="user"/>
 	<s:textfield name="userBean.password" key="pass"/>
+	${requestScope.tip}<br/>
 	<s:submit key="login"/><s:reset value="重置"/><br/>
 	<!--<s:submit key="regist"/>-->
 </s:form>
