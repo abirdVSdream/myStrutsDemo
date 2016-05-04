@@ -6,19 +6,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.mystrutsdemo.cai.app.dao.user.UserBean;
+import com.mystrutsdemo.cai.app.dao.test.MyDate;
 import com.mystrutsdemo.cai.app.dao.user.User;
 
 
 public class UserServices 
 {
 
-	private String url = "jdbc:mysql://localhost:3306/mystrutsdemo";
-	private String user ="root";
+	private String url = "jdbc:mysql://localhost:3306/mystrutsdemo?characterEncoding=utf8";
+	private String dbUser ="root";
 	private String pass = "123456";
 	public User serchByusername (String username) throws Exception
 	{
@@ -27,7 +30,7 @@ public class UserServices
 		//加载驱动
 		Class.forName("com.mysql.jdbc.Driver");
 		//建立连接
-		Connection conn =DriverManager.getConnection(url,user,pass);
+		Connection conn =DriverManager.getConnection(url,dbUser,pass);
 		//创建sql语句
 		Statement st = conn.createStatement();
 		User userBean = new User();
@@ -52,21 +55,24 @@ public class UserServices
 		//加载驱动
         Class.forName("com.mysql.jdbc.Driver");
         //建立连接
-        Connection conn =DriverManager.getConnection(url,user,pass);
+        Connection conn =DriverManager.getConnection(url,dbUser,pass);
         
-        String sql ="insert into user values (null,?,?,?,?,?,?,?,?,?,now())";
+        String sql ="insert into user values (null,?,?,?,?,?,?,?,?,?)";
         //创建sql语句
         PreparedStatement PreparedStatement =conn.prepareStatement(sql);
         PreparedStatement.setString(1,userBean.getUsername());
         PreparedStatement.setString(2,userBean.getPassword());
         PreparedStatement.setString(3,userBean.getEmail());
-        PreparedStatement.setString(4, userBean.getGender());
+        PreparedStatement.setString(4,userBean.getGender());
         
         PreparedStatement.setTimestamp(5, userBean.getBirthday());
         PreparedStatement.setString(6,userBean.getQq());
         PreparedStatement.setString(7,userBean.getPhone());
         PreparedStatement.setString(8, userBean.getDescription());
-        PreparedStatement.setTimestamp(9, userBean.getRegtime());
+        MyDate mydate = new MyDate();
+        SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String retStrFormatNowDate = sdFormatter.format(mydate.getMyDate());
+        PreparedStatement.setTimestamp(9, Timestamp.valueOf(retStrFormatNowDate));
         
         
         int result = PreparedStatement.executeUpdate();
@@ -87,7 +93,7 @@ public class UserServices
         
 			Class.forName("com.mysql.jdbc.Driver");
 			 //建立连接
-	        Connection conn =DriverManager.getConnection(url,user,pass);
+	        Connection conn =DriverManager.getConnection(url,dbUser,pass);
 			
 			PreparedStatement =conn.prepareStatement(sql);
 			rs = PreparedStatement.executeQuery();
@@ -113,7 +119,7 @@ public class UserServices
         
 			Class.forName("com.mysql.jdbc.Driver");
 			 //建立连接
-	        Connection conn =DriverManager.getConnection(url,user,pass);
+	        Connection conn =DriverManager.getConnection(url,dbUser,pass);
 			
 			PreparedStatement =conn.prepareStatement(sql);
 			PreparedStatement.setInt(1, (pageNumber-1)*pageSize);
@@ -123,7 +129,14 @@ public class UserServices
 			while(rs.next())
 			{
 				User user = new User();
-				user.setId(rs.getInt("id"));
+				user.setUid(rs.getInt("uid"));
+				user.setUsername(rs.getString("username"));
+				user.setEmail(rs.getString("email"));
+				user.setGender(rs.getString("gender"));
+				user.setPhone(rs.getString("phone"));
+				user.setQq(rs.getString("qq"));
+				user.setDescription(rs.getString("description"));
+				user.setRegtime(rs.getTimestamp("regtime"));
 				userList.add(user);
 			}
 			rs.close();

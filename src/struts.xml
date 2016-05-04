@@ -8,7 +8,12 @@
 	<constant name="struts.custom.i18n.resources" value="mess"/>
 	<!-- 指定国际化编码所使用的字符集 -->
 	<constant name="struts.i18n.encoding" value="utf-8"/>
+	
 	<package name="cai" extends="struts-default">
+	<interceptors>
+		<interceptor name="managerLogin" class="com.mystrutsdemo.cai.app.interceptor.ManagerLoginCheck"></interceptor>
+	</interceptors>
+	
 		<action name="regist" class="com.mystrutsdemo.cai.app.action.user.RegistAction">
 			<result name="error">/error.jsp</result>
 			<result name="success">/regist_welcome.jsp</result> 
@@ -22,6 +27,30 @@
 		<action name="test" class="com.mystrutsdemo.cai.app.action.user.TestValiAction">
 			<result name="input">/testva.jsp</result>
 			<result >/regist_welcome.jsp</result>
+		</action>
+		
+		<action name="regist2" class="com.mystrutsdemo.cai.app.action.test.RegistAction">
+			<result name="error">/error.jsp</result>
+			<result name="success">/regist_welcome.jsp</result> 
+			<!-- <result name="success" type="redirect">/welcome.jsp</result>-->
+		</action>
+		
+		<action name="userList" class="com.mystrutsdemo.cai.app.action.user.UserListAction">
+		<!--  <interceptor-ref name="managerLogin"/>
+		<interceptor-ref name="defaultStack"/>-->
+		<result name="login">/manager/login.jsp</result>
+		<result name="success">/manager/manager.jsp</result>
+		</action>
+		<action name="page" class="com.mystrutsdemo.cai.app.action.user.PageAction">
+		<!--  <interceptor-ref name="managerLogin"/>
+		<interceptor-ref name="defaultStack"/>-->
+		<result name="login">/manager//login.jsp</result>
+		<result type="redirect">/userList.action?pageNumber=${pageNumber}&amp;pageSize=${pageSize}&amp;totalPage=${totalPage}</result>
+		</action>
+		
+		<action name="managerlogin" class="com.mystrutsdemo.cai.app.action.manager.ManagerLoginAction">
+			<result name="error">/error.jsp</result>
+			<result type="redirect">/userList.action?pageNumber=${pageNumber}&amp;pageSize=${pageSize}&amp;totalPage=${totalPage}</result>
 		</action>
 	</package>
 	

@@ -24,27 +24,21 @@ public class RegistAction extends ActionSupport
 		this.name = name;
 	}
 
+
+
 	public User getUserBean() {
 		return userBean;
 	}
 
-	public void setUser(User userBean) {
+	public void setUserBean(User userBean) {
 		this.userBean = userBean;
 	}
-
 
 	public String execute() throws Exception
 	{
 		ActionContext act = ActionContext.getContext();
 		String uname = getUserBean().getUsername();
 		String upass = getUserBean().getPassword();
-		String email = getUserBean().getEmail();
-		String gender = getUserBean().getGender();
-		Timestamp birtyDay = getUserBean().getBirthday();
-		String qq = getUserBean().getQq();
-		String phone = getUserBean().getPhone();
-		String desc = getUserBean().getDescription();
-		Timestamp registTi = (Timestamp) new Date();
 		if(uname.equals("") || uname.equals(null))
 		{
 			act.put("tip", "你输入的用户名为空。请输入非空的用户名");

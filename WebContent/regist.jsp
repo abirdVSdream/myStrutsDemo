@@ -9,7 +9,7 @@
 </head>
 <body>
 <s:text name="registText"/><br/>
-<s:form action="regist" method="post">
+<s:form action="regist2" method="post">
 <s:textfield name="userBean.username" key="user"/>
 <s:textfield name="userBean.password" key="pass"/>
 <s:textfield name="userBean.email" key="mail"/>
