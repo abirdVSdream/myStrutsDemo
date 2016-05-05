@@ -1,6 +1,6 @@
 package com.mystrutsdemo.cai.app.action.user;
 
-import com.mystrutsdemo.cai.app.service.user.UserServices;
+import com.mystrutsdemo.cai.app.dao.user.UserDao;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class PageAction extends ActionSupport
@@ -8,7 +8,7 @@ public class PageAction extends ActionSupport
 	private int pageNumber;
 	private int totalPage;
 	private int pageSize;
-	private  UserServices userServices = new UserServices();
+	private  UserDao userServices = new UserDao();
 	public int getPageNumber() {
 		return pageNumber;
 	}
@@ -27,16 +27,16 @@ public class PageAction extends ActionSupport
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-	public UserServices getUserServices() {
+	public UserDao getUserServices() {
 		return userServices;
 	}
-	public void setUserServices(UserServices userServices) {
+	public void setUserServices(UserDao userServices) {
 		this.userServices = userServices;
 	}
 	
 	public String execute() throws Exception
 	{
-		pageSize = 10;
+		pageSize = 5;
 		
 		int userAmount = userServices.getUserAmount();
 		this.totalPage =userAmount % pageSize ==0 ? 

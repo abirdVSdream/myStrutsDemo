@@ -17,6 +17,7 @@
 	<th>QQ</th>
 	<th>电话</th>
 	<th>自我介绍</th>
+	<th>注册时间</th>
 	<th>操作</th>
 	</tr>
 <s:iterator id="u" value="userList">
@@ -28,6 +29,7 @@
 	<td><s:property value="#u.qq"/></td>
 	<td><s:property value="#u.phone"/></td>
 	<td><s:property value="#u.description"/></td>
+	<td><s:property value="#u.regtime"/></td>
 	<td><a href="deleteUser.action?uid=<s:property value="#u.uid"/>">删除</a></td>
 	</tr>
 	</s:iterator>
@@ -49,7 +51,7 @@
 </s:param>
 </s:url>
 <s:a href="%{nextPage}">下一页</s:a>
-<s:url id ="nextPage" action="page">
+<s:url id ="lastPage" action="page">
 <s:param name="pageNumber">
 <s:property value="totalPage"/>
 </s:param>

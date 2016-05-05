@@ -1,4 +1,4 @@
-package com.mystrutsdemo.cai.app.dao.test;
+package com.mystrutsdemo.cai.app.bean.test;
 
 public class Book 
 {

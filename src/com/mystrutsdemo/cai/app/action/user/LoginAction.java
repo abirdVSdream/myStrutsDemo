@@ -1,7 +1,8 @@
 package com.mystrutsdemo.cai.app.action.user;
 
-import com.mystrutsdemo.cai.app.dao.user.UserBean;
-import com.mystrutsdemo.cai.app.service.user.UserService;
+import com.mystrutsdemo.cai.app.bean.user.UserBean;
+import com.mystrutsdemo.cai.app.dao.user.UserDao;
+import com.mystrutsdemo.cai.app.dao.user.UserDao2;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -56,7 +57,7 @@ public class LoginAction extends ActionSupport
 		}
 		else
 		{
-			UserService userService = new UserService();
+			UserDao userService = new UserDao();
 			String username = userService.serchByusername(getUserBean().getUsername()).getUsername();
 			String password = userService.serchByusername(getUserBean().getUsername()).getPassword();
 		 	if(username==null)
@@ -71,7 +72,7 @@ public class LoginAction extends ActionSupport
 			}
 			else
 			{
-				System.out.println(getUserBean().getUsername());
+//				System.out.println(getUserBean().getUsername());
 				ctx.put("tip", getText("succTip",new String[]{getUserBean().getUsername()}));
 				return SUCCESS;
 			}

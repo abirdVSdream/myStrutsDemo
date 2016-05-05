@@ -1,4 +1,4 @@
-package com.mystrutsdemo.cai.app.service.user;
+package com.mystrutsdemo.cai.app.dao.user;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,17 +12,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.mystrutsdemo.cai.app.dao.user.UserBean;
-import com.mystrutsdemo.cai.app.dao.test.MyDate;
-import com.mystrutsdemo.cai.app.dao.user.User;
+import com.mystrutsdemo.cai.app.bean.test.MyDate;
+import com.mystrutsdemo.cai.app.bean.user.User;
+import com.mystrutsdemo.cai.app.bean.user.UserBean;
 
 
-public class UserServices 
+public class UserDao 
 {
 
 	private String url = "jdbc:mysql://localhost:3306/mystrutsdemo?characterEncoding=utf8";
 	private String dbUser ="root";
 	private String pass = "123456";
+	
+	/*
+	 * 通过用户名查找
+	 */
 	public User serchByusername (String username) throws Exception
 	{
 		String sq = "select * from user where username=";
@@ -39,13 +43,20 @@ public class UserServices
 		{
 			userBean.setUsername(rs.getString("username"));
 			userBean.setPassword(rs.getString("password"));
+			userBean.setEmail(rs.getString("email"));
+			userBean.setGender(rs.getString("gender"));
+			userBean.setQq(rs.getString("qq"));
+			userBean.setPhone(rs.getString("phone"));
+			userBean.setDescription(rs.getString("description"));
 		}
 		rs.close();
 		st.close();
 		conn.close();
 		return userBean;
 	}
-	//插入用户信息
+	/*
+	 * 插入用户信息
+	 */
 	public int insert(User userBean) throws Exception
 	{
 //		String user = userBean.getUsername();
@@ -82,7 +93,32 @@ public class UserServices
         return result;
         
 	}
-	
+	/*
+	 * 更新用户信息
+	 */
+	public int update(User userBean)throws Exception
+	{
+		//加载驱动
+		Class.forName("com.mysql.jdbc.Driver");
+		//建立连接
+		Connection conn = DriverManager.getConnection(url,dbUser,pass);
+		String sql = "update user set password=?,email=?,qq=?,phone=?,description=? where username=?";
+		//创建sql语句
+		PreparedStatement PreparedStatement=conn.prepareStatement(sql);
+		
+        PreparedStatement.setString(1,userBean.getPassword());
+        PreparedStatement.setString(2,userBean.getEmail());
+        PreparedStatement.setString(3,userBean.getQq());
+        PreparedStatement.setString(4,userBean.getPhone());
+        PreparedStatement.setString(5, userBean.getDescription());
+        PreparedStatement.setString(6,userBean.getUsername());
+		
+        int result = PreparedStatement.executeUpdate();
+        return result;
+	}
+	/*
+	 * 查找用户表的行数
+	 */
 	public int getUserAmount() throws Exception
 	{
 		int i = 0;
@@ -107,7 +143,9 @@ public class UserServices
        
 		
 	}
-	
+	/*
+	 * 分页查询用户表的用户信息
+	 */
 	public List<User> getUserList(int pageNumber,int pageSize) throws Exception
 	{
 		List<User> userList = new ArrayList<User>();
@@ -146,6 +184,9 @@ public class UserServices
 		
 	}
 	
+	/*
+	 * 删除用户
+	 */
 	public int deleteByuid(String uid) throws Exception
 	{
 		String sql = "delete from user where uid= ?";

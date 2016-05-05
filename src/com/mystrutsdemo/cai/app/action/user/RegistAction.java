@@ -3,10 +3,10 @@ package com.mystrutsdemo.cai.app.action.user;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import com.mystrutsdemo.cai.app.dao.user.User;
-import com.mystrutsdemo.cai.app.dao.user.UserBean;
-import com.mystrutsdemo.cai.app.service.user.UserService;
-import com.mystrutsdemo.cai.app.service.user.UserServices;
+import com.mystrutsdemo.cai.app.bean.user.User;
+import com.mystrutsdemo.cai.app.bean.user.UserBean;
+import com.mystrutsdemo.cai.app.dao.user.UserDao2;
+import com.mystrutsdemo.cai.app.dao.user.UserDao;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -51,7 +51,7 @@ public class RegistAction extends ActionSupport
 		}
 		else 
 		{
-			UserServices userService = new UserServices();
+			UserDao userService = new UserDao();
 			String username = userService.serchByusername(uname).getUsername();
 			
 			if(uname.equals(username))

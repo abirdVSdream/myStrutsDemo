@@ -1,16 +1,15 @@
 package com.mystrutsdemo.cai.app.action.manager;
 
-import com.mystrutsdemo.cai.app.dao.user.User;
-import com.mystrutsdemo.cai.app.dao.user.UserBean;
-import com.mystrutsdemo.cai.app.service.user.UserService;
-import com.mystrutsdemo.cai.app.service.user.UserServices;
+import com.mystrutsdemo.cai.app.bean.user.Manager;
+import com.mystrutsdemo.cai.app.dao.manager.ManagerDao;
+import com.mystrutsdemo.cai.app.dao.user.UserDao;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ManagerLoginAction extends ActionSupport 
 {
 	//private LoginService loginService;
-	private User userBean;
+	private Manager userBean;
 	private int pageNumber;
 	private int pageSize;
 	private String username;
@@ -23,10 +22,11 @@ public class ManagerLoginAction extends ActionSupport
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-	public User getUserBean() {
+	
+	public Manager getUserBean() {
 		return userBean;
 	}
-	public void setUserBean(User userBean) {
+	public void setUserBean(Manager userBean) {
 		this.userBean = userBean;
 	}
 	public int getPageNumber() {
@@ -59,9 +59,9 @@ public class ManagerLoginAction extends ActionSupport
 		}
 		else
 		{
-			UserServices userServices = new UserServices();
-			String username = userServices.serchByusername(getUserBean().getUsername()).getUsername();
-			String password = userServices.serchByusername(getUserBean().getUsername()).getPassword();
+			ManagerDao managerServices = new ManagerDao();
+			String username = managerServices.serchByusername(getUserBean().getUsername()).getUsername();
+			String password = managerServices.serchByusername(getUserBean().getUsername()).getPassword();
 		 	if(username==null)
 			{
 				ctx.put("tip", "用户不存在");
@@ -72,7 +72,7 @@ public class ManagerLoginAction extends ActionSupport
 				ctx.put("tip", "用户名与者密码不匹配");
 				return LOGIN;
 			}
-			else if(!username.equals("cai"))
+			else if(!username.equals("admin"))
 		 	{
 				ctx.put("tip", "不好意思。你不是管理员");
 				return LOGIN;
@@ -80,7 +80,7 @@ public class ManagerLoginAction extends ActionSupport
 			else
 			{
 				this.setPageNumber(1);
-				this.setPageSize(10);
+				this.setPageSize(5);
 				this.setUsername(username);
 				return SUCCESS;
 			}
@@ -90,10 +90,10 @@ public class ManagerLoginAction extends ActionSupport
 	
 	public String delete() throws Exception
 	{
-		UserServices userServices = new UserServices();
+		UserDao userServices = new UserDao();
 		int result = userServices.deleteByuid(getUid());
 		this.setPageNumber(1);
-		this.setPageSize(10);
+		this.setPageSize(5);
 //		this.setUsername(username);
 		return SUCCESS;
 		

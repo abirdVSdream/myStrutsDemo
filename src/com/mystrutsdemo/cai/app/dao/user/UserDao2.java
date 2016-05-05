@@ -1,4 +1,4 @@
-package com.mystrutsdemo.cai.app.service.test;
+package com.mystrutsdemo.cai.app.dao.user;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,10 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import com.mystrutsdemo.cai.app.dao.user.UserBean;
+import com.mystrutsdemo.cai.app.bean.user.UserBean;
 
 
-public class UserService 
+public class UserDao2 
 {
 
 	private String url = "jdbc:mysql://localhost:3306/mystrutsdemo";

@@ -1,8 +1,8 @@
-package com.mystrutsdemo.cai.app.service.test;
+package com.mystrutsdemo.cai.app.dao.test;
 
-import com.mystrutsdemo.cai.app.dao.test.Book;
+import com.mystrutsdemo.cai.app.bean.test.Book;
 
-public class BookService 
+public class BookDao 
 {
 	public Book [] getBooks()
 	{

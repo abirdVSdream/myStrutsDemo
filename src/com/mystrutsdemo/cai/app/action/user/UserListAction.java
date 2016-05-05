@@ -1,12 +1,10 @@
 package com.mystrutsdemo.cai.app.action.user;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.mystrutsdemo.cai.app.dao.user.User;
-import com.mystrutsdemo.cai.app.service.user.UserServices;
+import com.mystrutsdemo.cai.app.bean.user.User;
+import com.mystrutsdemo.cai.app.dao.user.UserDao;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UserListAction extends ActionSupport
@@ -48,7 +46,7 @@ public class UserListAction extends ActionSupport
 	}
 	public String execute() throws Exception
 	{
-		UserServices userServices = new UserServices();
+		UserDao userServices = new UserDao();
 		userList = userServices.getUserList(pageNumber, pageSize);
 		return SUCCESS;
 	}
